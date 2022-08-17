@@ -12,7 +12,7 @@ const StarsRating: React.FC<Props> = ({ onClick, ratingValue }) => {
       onClick={(value: number) => {
         onClick(value / 20);
       }}
-      ratingValue={ratingValue}
+      ratingValue={ratingValue * 20}
       size={20}
     />
   );

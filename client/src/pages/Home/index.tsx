@@ -29,7 +29,19 @@ const Home: React.FC = () => {
   }, []);
 
   const onRate = (storeId: string, value: number): void => {
-    console.log(storeId, value);
+    axios.patch(`http://localhost:8000/stores/${storeId}`, {
+      data: {
+        attributes: {
+          rating: value
+        }
+      }
+    }, {
+      headers: {
+        'Content-Type': 'application/vnd.api+json'
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   const areResultsPresent = stores.length > 0 && !loading;
