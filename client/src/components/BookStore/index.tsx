@@ -30,6 +30,8 @@ const BookStore: React.FC<Props> = ({
   onRate,
   rating
 }) => {
+  const isTableEmpty = tableRows.length === 0;
+
   return (
     <div className={styles.root}>
       <div className={cn(styles.pinToTop, styles.horizontalItems)}>
@@ -41,7 +43,7 @@ const BookStore: React.FC<Props> = ({
             <h1>{name}</h1>
             <StarsRating onClick={onRate} ratingValue={rating} />
           </header>
-          <TwoColumnTable title={tableTitle} rows={tableRows} />
+          {!isTableEmpty ? <TwoColumnTable title={tableTitle} rows={tableRows} /> : 'No data available'}
         </main>
       </div>
       <footer className={styles.horizontalItems}>
