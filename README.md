@@ -1,3 +1,13 @@
+Running backend:
+1. `cd book-store-api`
+2. `npm i`
+3. `npm start`
+
+Running frontend:
+1. `cd client`
+2. `npm i`
+3. `npm start`
+
 ## Squirro Frontend Coding Challenge
 
 Welcome to the Squirro coding challenge! Your task is to create an APP that lists the best-selling books for each book store. 
