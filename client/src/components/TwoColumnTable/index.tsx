@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.module.scss';
 
-interface IRow {
+export interface IRow {
   id: number;
   left: string;
   right: string;
