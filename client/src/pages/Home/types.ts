@@ -27,8 +27,7 @@ export interface IAPICountry extends IRelation {
   };
 }
 
-export interface IAPIStore {
-  id: string;
+export interface IAPIStore extends IRelation {
   attributes: {
     establishmentDate: string;
     name: string;
@@ -53,9 +52,7 @@ export interface IBook {
   author: string;
 }
 
-export interface IAPIIncluded {
-  id: string;
-  type: string;
+export interface IAPIIncluded extends IRelation {
   attributes: {
     [key: string]: any;
   };

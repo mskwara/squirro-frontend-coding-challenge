@@ -24,6 +24,7 @@ module.exports = {
         delimiter: 'semi',
         requireLast: false
       }
-    }]
+    }],
+    '@typescript-eslint/restrict-template-expressions': 'off'
   }
 };

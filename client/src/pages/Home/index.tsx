@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import BookStore from 'components/BookStore';
 import { IAPICountry, IAPIIncluded, IAPIStore } from './types';
-import { findInIncluded, getMappedTableRows } from './utils';
+import { findInIncluded, getMappedTableRows, handleError } from './utils';
 import styles from './styles.module.scss';
 
 const Home: React.FC = () => {
@@ -12,7 +12,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/stores')
+      .get(`${process.env.REACT_APP_API_URL}/stores`)
       .then((res) => {
         const stores = res.data.data;
         const included = res.data.included;
@@ -20,16 +20,14 @@ const Home: React.FC = () => {
         setStores(stores);
         setIncluded(included);
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch(handleError)
       .finally(() => {
         setLoading(false);
       });
   }, []);
 
   const onRate = (storeId: string, value: number): void => {
-    axios.patch(`http://localhost:8000/stores/${storeId}`, {
+    axios.patch(`${process.env.REACT_APP_API_URL}/stores/${storeId}`, {
       data: {
         attributes: {
           rating: value
@@ -39,9 +37,7 @@ const Home: React.FC = () => {
       headers: {
         'Content-Type': 'application/vnd.api+json'
       }
-    }).catch((err) => {
-      console.log(err);
-    });
+    }).catch(handleError);
   };
 
   const areResultsPresent = stores.length > 0 && !loading;
@@ -51,7 +47,7 @@ const Home: React.FC = () => {
       {loading && 'Loading'}
       {stores.length === 0 && 'No results'}
       {areResultsPresent &&
-        stores.map((store: IAPIStore) => {
+        stores.map((store) => {
           const tableRows = getMappedTableRows(
             store.relationships?.books?.data,
             included
@@ -60,8 +56,7 @@ const Home: React.FC = () => {
 
           const country = findInIncluded(
             included,
-            countryRef.type,
-            countryRef.id
+            countryRef
           ) as IAPICountry;
 
           return (

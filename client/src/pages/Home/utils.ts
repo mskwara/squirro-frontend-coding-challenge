@@ -3,11 +3,10 @@ import { IAPIAuthor, IAPIBook, IAPIIncluded, IBook, IRelation } from './types';
 
 export const findInIncluded = (
   includedElements: IAPIIncluded[],
-  type: string,
-  id: string
+  data: IRelation
 ): IAPIIncluded | undefined =>
   includedElements.find(
-    (included) => included.type === type && included.id === id
+    (included) => included.type === data.type && included.id === data.id
   );
 
 export const getMappedTableRows = (
@@ -18,14 +17,12 @@ export const getMappedTableRows = (
     books?.map((book): IBook => {
       const fullBookInfo = findInIncluded(
         included,
-        book.type,
-        book.id
+        book
       ) as IAPIBook;
       const authorRef = fullBookInfo?.relationships?.author?.data;
       const author = findInIncluded(
         included,
-        authorRef.type,
-        authorRef.id
+        authorRef
       ) as IAPIAuthor;
 
       return {
@@ -46,4 +43,8 @@ export const getMappedTableRows = (
     }));
 
   return tableRows;
+};
+
+export const handleError = (err: any): void => {
+  console.log(err);
 };
