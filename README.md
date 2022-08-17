@@ -5,7 +5,7 @@ Running backend:
 
 Running frontend:
 1. `cd client`
-2. Create a file named `.env` in this directory and place following line:
+2. Create a file named `.env` in this directory and place following line inside:
     `REACT_APP_API_URL=http://localhost:8000`
 3. `npm i`
 4. `npm start`
