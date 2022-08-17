@@ -1,0 +1,10 @@
+.root {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+
+  .link {
+    text-decoration: none;
+    color: black;
+  }
+}
